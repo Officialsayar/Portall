@@ -15,13 +15,17 @@ app.post("/submit", async (req, res) => {
   const { title, message, mood } = req.body;
   const timestamp = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kathmandu" });
 
-  const text = `
+const { title, problem, request, confession, mood } = req.body;
+const text = `
 ❤️ *New Grievance Received!*
 📌 *Title:* ${title}
-🗣️ *Message:* ${message}
+🗣️ *Problem:* ${problem}
+🙏 *Request:* ${request}
+😳 *Confession:* ${confession}
 😊 *Mood:* ${mood}
 🕒 *Time:* ${timestamp}
 `;
+
 
   try {
     const response = await axios.post(`https://api.telegram.org/bot${process.env.BOT_TOKEN}/sendMessage`, {
